@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% url 'bmi_calculator' as home %}
+{% load static %}
+
+{% block title %}bmi_calculator{% endblock title %}
+
+{% block body %}
+<style>
+.bg{
+ height:100%;
+    width:100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('/static/images/bg1.jpg');
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.box{
+   width:400px;
+    height:450px;
+    position: relative;
+    margin: 6% auto;
+    background:#fff;
+    padding: 5px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.input{
+
+ 
+        width: 100%;
+        padding: 20px 0;
+        margin: 10px 0;
+        border-left: 10px;
+        border-top:10px;
+        border-right: 10px;
+        outline: none;
+        background: transparent;
+
+}
+
+</style>
+<form>
+
+<div class="bg">
+<div class="box">
+<br>
+<center>
+<i><h3>BMI Calculator</h3><i>
+</center>
+<br>
+<div class="input">
+Age :
+<input placeholder="Age" size="30">
+<br>
+<br>
+Gender :  
+<input type="radio" name="gender" value="female">Female
+<input type="radio" name="gender" value="male">Male
+<input type="radio" name="gender" value="other">Other
+<br>
+<br>
+height :
+<input placeholder="height in m" id="h" size="30" required>
+<br>
+<br>
+Weight :
+<input placeholder="weight in kg" id="w" size="30" required>
+<br>
+<br>
+
+<center>
+<button type="submit" class="btn btn-primary" onclick="Cal()" >Calculate</button>
+</center>
+<br>
+<center>
+<h4 id="answer"> </h4>
+</center>
+</div>
+</div>
+</div>
+
+</form> 
+
+<script>
+function Cal()
+  {
+    var field1=document.getElementById("h").value;
+    var field2=document.getElementById("w").value;
+
+    var result=parseFloat(field2)/(parseFloat(field1)*parseFloat(field1));
+
+    if(!isNaN(result))
+    {
+      document.getElementById("answer").innerHTML="Your BMI index is "+result;
+     
+    }
+  }
+
+</script>
+
+{% endblock body %}

@@ -1,0 +1,875 @@
+{% extends 'base.html' %}
+{% url 'food' as food %}
+{% load static %}
+
+{% block title %}food{% endblock title %}
+
+{% block body %}
+
+
+
+
+<style>
+header{
+background-image: url('/static/images/bg2.jpg');
+background-repeat:no-repeat;
+background-size:cover;
+background-position:center;
+height:80px;
+position:relative;
+}
+nav{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  padding:10px 50px 0 40px;
+}
+nav li{
+list-style:none;
+display:inline-block;
+padding-right:10px;
+padding-left:10px;
+}
+.add-cart
+{
+    color: #007bff;
+    font-size: xx-large;
+}
+.products-container{
+ font-size:25px;
+ margin-left:10px ;
+ margin-right:10px;
+
+}
+.baskettotalcontainer{
+  width:100%;
+  display:flex;
+ border-top:3px solid lightgrey ;
+ }
+
+.product{
+  margin-left:10px ;
+ margin-right:10px;
+
+}
+.product-header{
+  width:100%;
+  display:flex;
+  border-bottom: 3px solid lightgrey;
+}
+
+.product-title{
+  width:45%;
+}
+
+.product-calorie{
+  width:40%;
+}
+
+.quantity{
+  width:50%;
+}
+
+.total{
+  width:25%;
+}
+
+</style>
+
+<header>
+<nav>
+<b><i><h2 style="padding:10px;">Track your food with Lite!</h2></b></i>
+<ul>
+<li class="cart">
+
+
+<!-- Button trigger modal -->
+<button onclick="displaycart()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleM">
+  Items <span>0</span>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Calories</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="products-container">
+          <div class="product-header">
+            <h6 class="product-title">PRODUCT</h6>
+            <h6 class="product-calorie">CALORIE</h6>
+            <h6 class="quantity">QUANTITY</h6>
+            <h6 class="total">TOTAL</h6>
+          </div>
+        </div>
+
+        <div class="products">
+
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</ul>
+
+
+</nav>
+</header>
+
+<u><center><i><b><h1 style="margin:20;">Breakfast</h1></b></i></center></u>
+<div style=" display: flex; flex-wrap: wrap; justify-content:space-between;">
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/idli.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Idli(plain)</h5>
+    <p class="card-text">1.0 serving(2.0 piece)</p>
+    <h5>48 Cal</h5>
+    <a href="#" class="add-cart cart1" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/dosa.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Dosa(plain)</h5>
+    <p class="card-text">1.0 serving(2.0 piece)</p>
+    <h5>302 Cal</h5>
+    <a href="#" class="add-cart cart2" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/chapati.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Wheat Chapati</h5>
+    <p class="card-text">3.0 piece</p>
+    <h5>146 Cal</h5>
+    <a href="#" class="add-cart cart3" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/egg.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Boiled Egg</h5>
+    <p class="card-text">1.0 serving(2.0 piece)</p>
+    <h5>86 Cal</h5>
+    <a href="#" class="add-cart cart4" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/bread.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Wheat bread(Brown Bread)</h5>
+    <p class="card-text">2.0 slice</p>
+    <h5>136 Cal</h5>
+    <a href="#" class="add-cart cart5" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/paratha.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Aloo paratha</h5>
+    <p class="card-text">1.0 serving(1.0 piece)</p>
+    <h5>182 Cal</h5>
+    <a href="#" class="add-cart cart6" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/banana.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Ripe Banana</h5>
+    <p class="card-text">1.0 small(6" to 6-7/8" long)</p>
+    <h5>117 Cal</h5>
+    <a href="#" class="add-cart cart7" style="font-size: xx-large;">Add</a>
+  </div>  
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/milk.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Cow's Milk</h5>
+    <p class="card-text">1.0 glass</p>
+    <h5>176 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/coffee.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Filter Coffee with milk</h5>
+    <p class="card-text">1.0 serving(1.0 cup)</p>
+    <h5>53 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/tea.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Tea with milk and sugar</h5>
+    <p class="card-text">1.0 serving(1.0 tea cup)</p>
+    <h5>73 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/melon.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Watermelon Juice</h5>
+    <p class="card-text">1.0 glass(250 ml)</p>
+    <h5>80 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/apple.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Apple Juice</h5>
+    <p class="card-text">1.0 glass(250 ml)</p>
+    <h5>71 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+</div>
+
+<u><center><i><b><h1 style="margin:20;">Lunch</h1></b></i></center></u>
+<div style=" display: flex; flex-wrap: wrap; justify-content:space-between;">
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/Rice.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Plain cooked rice</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>173 Cal</h5>
+    <a href="#" class="add-cart cart9" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/dal.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Toor dal</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>134 Cal</h5>
+    <a href="#" class="add-cart cart10" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/crice.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Curd rice</h5>
+    <p class="card-text">1.0 serving(1.0 katori)</p>
+    <h5>176 Cal</h5>
+    <a href="#" class="add-cart cart11" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/dahi.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Dahi(curd)</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>90 Cal</h5>
+    <a href="#" class="add-cart cart12" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/veg.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Sauteed vegetables</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>82 Cal</h5>
+    <a href="#" class="add-cart cart13" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/sambar.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Sambar</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>85 Cal</h5>
+    <a href="#" class="add-cart cart14" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/chicken.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Traditional chicken curry</h5>
+    <p class="card-text">1.0 serving(1.0 katori)</p>
+    <h5>359 Cal</h5>
+    <a href="#" class="add-cart cart15" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/fish.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Fish curry</h5>
+    <p class="card-text">1.0 serving(1.0 katori)</p>
+    <h5>158 Cal</h5>
+    <a href="#" class="add-cart cart16" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/cegg.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Egg curry</h5>
+    <p class="card-text">1.0 katori(150.0 g )</p>
+    <h5>118 Cal</h5>
+    <a href="#" class="add-cart cart17" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+</div>
+
+<u><center><i><b><h1 style="margin:20;">Evening Snacks</h1></b></i></center></u>
+<div style=" display: flex; flex-wrap: wrap; justify-content:space-between;">
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/biscuit.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Marie gold biscuit</h5>
+    <p class="card-text">4.0 piece</p>
+    <h5>89 Cal</h5>
+    <a href="#" class="add-cart cart18" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/samosa.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Samosa</h5>
+    <p class="card-text">1.0 piece</p>
+    <h5>349 Cal</h5>
+    <a href="#" class="add-cart cart19" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/peas.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Peas roasted</h5>
+    <p class="card-text">100.0 grams</p>
+    <h5>340 Cal</h5>
+    <a href="#" class="add-cart cart20" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/milk.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Cow's Milk</h5>
+    <p class="card-text">1.0 glass</p>
+    <h5>176 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/coffee.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Filter Coffee with milk</h5>
+    <p class="card-text">1.0 serving(1.0 cup)</p>
+    <h5>53 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/tea.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Tea with milk and sugar</h5>
+    <p class="card-text">1.0 serving(1.0 tea cup)</p>
+    <h5>73 Cal</h5>
+    <a href="#" class="add-cart cart8" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+</div>
+
+
+<u><center><i><b><h1 style="margin:20;">Dinner</h1></b></i></center></u>
+<div style=" display: flex; flex-wrap: wrap; justify-content:space-between;">
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/Rice.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Plain cooked rice</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>173 Cal</h5>
+    <a href="#" class="add-cart cart9" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/dal.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Toor dal</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>134 Cal</h5>
+    <a href="#" class="add-cart cart10" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/dosa.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Dosa(plain)</h5>
+    <p class="card-text">1.0 serving(2.0 piece)</p>
+    <h5>302 Cal</h5>
+    <a href="#" class="add-cart cart2" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/chapati.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Wheat Chapati</h5>
+    <p class="card-text">3.0 piece</p>
+    <h5>146 Cal</h5>
+    <a href="#" class="add-cart cart3" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/crice.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Curd rice</h5>
+    <p class="card-text">1.0 serving(1.0 katori)</p>
+    <h5>176 Cal</h5>
+    <a href="#" class="add-cart cart11" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+
+<div class="card" style=" margin:20px; width: 25rem;">
+  <img class="card-img-top" src="{%static 'images/sambar.jpg'%}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Sambar</h5>
+    <p class="card-text">1.0 katori</p>
+    <h5>85 Cal</h5>
+    <a href="#" class="add-cart cart14" style="font-size: xx-large;">Add</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+let carts=document.querySelectorAll('.add-cart');
+let products=[
+{
+  name:'Idli(plain)',
+  tag:'idli',
+  Calorie:48,
+  incart:0
+
+},
+
+{
+  name:'Dosa(plain)',
+  tag:'dosa',
+  Calorie:302,
+  incart:0
+
+},
+
+{
+  name:'Wheat Chapati',
+  tag:'chapati',
+  Calorie:146,
+  incart:0
+
+},
+
+
+{
+  name:'Boiled Egg',
+  tag:'egg',
+  Calorie:86,
+  incart:0
+
+},
+
+{
+  name:'Wheat bread',
+  tag:'bread',
+  Calorie:136,
+  incart:0
+
+},
+
+{
+  name:'Aloo paratha',
+  tag:'paratha',
+  Calorie: 182,
+  incart:0
+
+},
+
+{
+  name:'Ripe Banana',
+  tag:'banana',
+  Calorie: 117,
+  incart:0
+
+},
+
+{
+  name:'Cows Milk',
+  tag:'milk',
+  Calorie: 167,
+  incart:0
+
+},
+
+{
+  name:'Milk Coffee',
+  tag:'coffee',
+  Calorie: 53,
+  incart:0
+
+},
+
+{
+  name:'Tea (milk)',
+  tag:'tea',
+  Calorie: 73,
+  incart:0
+
+},
+
+{
+  name:'Watermelon',
+  tag:'melon',
+  Calorie: 80,
+  incart:0
+
+},
+
+{
+  name:'apple(juice)',
+  tag:'apple',
+  Calorie: 71,
+  incart:0
+
+},
+
+{
+  name:'Plain rice',
+  tag:'rice',
+  Calorie: 173,
+  incart:0
+
+},
+
+{
+  name:'Toor dal',
+  tag:'dal',
+  Calorie: 134,
+  incart:0
+
+},
+
+{
+  name:'Curd rice',
+  tag:'crice',
+  Calorie: 176,
+  incart:0
+
+},
+
+{
+  name:'Dahi(curd)',
+  tag:'dahi',
+  Calorie: 90,
+  incart:0
+
+},
+
+
+{
+  name:'Sauteed Veg.',
+  tag:'veg',
+  Calorie: 82,
+  incart:0
+
+},
+
+{
+  name:'MixVeg Sambar',
+  tag:'sambar',
+  Calorie: 85,
+  incart:0
+
+},
+
+{
+  name:'Chicken curry',
+  tag:'chicken',
+  Calorie: 359,
+  incart:0
+
+},
+
+{
+  name:'Fish curry',
+  tag:'fish',
+  Calorie: 158,
+  incart:0
+
+},
+
+{
+  name:'Egg curry',
+  tag:'cegg',
+  Calorie: 118,
+  incart:0
+
+},
+
+{
+  name:'Marie gold',
+  tag:'biscuit',
+  Calorie: 89,
+  incart:0
+
+},
+
+{
+  name:'Samosa',
+  tag:'samosa',
+  Calorie: 349,
+  incart:0
+
+},
+
+{
+  name:'Peas roasted',
+  tag:'peas',
+  Calorie: 340,
+  incart:0
+
+},
+
+{
+  name:'Cows Milk',
+  tag:'repeatmilk',
+  Calorie: 167,
+  incart:0
+
+},
+
+{
+  name:'Milk Coffee',
+  tag:'repeatcoffee',
+  Calorie: 53,
+  incart:0
+
+},
+
+{
+  name:'Tea (milk)',
+  tag:'repeattea',
+  Calorie: 73,
+  incart:0
+
+},
+
+
+
+{
+  name:'Plain rice',
+  tag:'repeatrice',
+  Calorie: 173,
+  incart:0
+
+},
+
+{
+  name:'Toor dal',
+  tag:'repeatdal',
+  Calorie: 134,
+  incart:0
+
+},
+
+
+
+{
+  name:'Dosa(plain)',
+  tag:'repeatdosa',
+  Calorie:302,
+  incart:0
+
+},
+
+{
+  name:'Wheat Chapati',
+  tag:'repeatchapati',
+  Calorie:146,
+  incart:0
+
+},
+
+{
+  name:'Curd rice',
+  tag:'repeatcrice',
+  Calorie: 176,
+  incart:0
+
+},
+
+{
+  name:'MixVeg Sambar',
+  tag:'repeatsambar',
+  Calorie: 85,
+  incart:0
+
+},
+
+];
+
+for(let i=0; i<carts.length; i++) {
+  carts[i].addEventListener('click',() =>{
+    cartnumbers(products[i]);
+    totalcalorie(products[i]);
+  } )
+}
+
+function onloadcartnumbers()
+{
+  let productnumbers=localStorage.getItem("cartnumbers");
+  
+  if(productnumbers){
+    document.querySelector('.cart span').textContent= productnumbers;
+
+  }
+
+}
+
+function cartnumbers(product){
+  
+  let productnumbers=localStorage.getItem("cartnumbers");
+ 
+  productnumbers=parseInt(productnumbers);
+  if(productnumbers){
+    localStorage.setItem('cartnumbers', productnumbers+1);
+    document.querySelector('.cart span').textContent= productnumbers + 1;
+  }
+  else{
+    localStorage.setItem('cartnumbers',1);
+    document.querySelector('.cart span').textContent=1;
+  }
+  setItems(product);
+
+}
+function setItems(product){
+  let cartitems= localStorage.getItem('productsincart');
+
+  
+  
+  if(cartitems != null){
+      cartitems=JSON.parse(cartitems);
+    if(cartitems[product.tag] == undefined)
+    {
+      cartitems={
+        ...cartitems,
+        [product.tag]:product
+      }
+    }
+    cartitems[product.tag].incart+=1;
+  }
+  else{
+    product.incart=1;
+  cartitems={
+    [product.tag]:product
+  }
+  }
+  
+  localStorage.setItem("productsincart",JSON.stringify(cartitems));
+}
+
+function totalcalorie(product){
+//console.log("The calorie of item is ",product.Calorie);
+let cartcalorie= localStorage.getItem('totalcalorie');
+
+
+
+if(cartcalorie != null){
+  cartcalorie=parseInt(cartcalorie);
+localStorage.setItem("totalcalorie",cartcalorie+product.Calorie)
+}
+else{
+localStorage.setItem("totalcalorie",product.Calorie);
+}
+
+}
+function displaycart(){
+ 
+let cartitems=localStorage.getItem("productsincart");
+cartitems=JSON.parse(cartitems);
+let productcontainer=document.querySelector(".products");
+let cartcalorie= localStorage.getItem('totalcalorie');
+
+if(cartitems && productcontainer){
+  productcontainer.innerHTML ='';
+  Object.values(cartitems).map(item =>{
+    productcontainer.innerHTML +=`
+    <div class="product">
+  <pre>${item.name}       ${item.Calorie}Cal           ${item.incart}             ${item.Calorie*item.incart}Cal</pre>
+  </div>
+  
+    `;
+  });
+  productcontainer.innerHTML +=`
+  <div class="baskettotalcontainer">
+  <b><pre>Total Intake Calories                             ${cartcalorie}Cal</pre></b>
+  </div>
+  `
+ 
+}
+
+}
+
+displaycart();
+onloadcartnumbers();
+</script>
+
+
+
+{% endblock body %}
